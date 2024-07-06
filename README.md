@@ -1,10 +1,5 @@
 ﻿ChronoFlex-Adaptive-FPGA-Timekeeper ON BASYS3
 
-Github:  <https://github.com/dhanush-271/ChronoFlex-Adaptive-FPGA-Timekeeper_Basys3>
-
-`		`KOTHAPALLI DHANUSH
-
-
 **1.INTRODUCTION**
 
 
