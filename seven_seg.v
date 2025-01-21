@@ -4,7 +4,7 @@ module seven_seg(
     input reset,
     input [1:0] state,
     input tm_state,
-	input sw_state,
+    input sw_state,
     input edit_place,
     input [3:0] ones,
     input [3:0] tens,
