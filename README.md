@@ -1,65 +1,93 @@
 ﻿ChronoFlex-Adaptive-FPGA-Timekeeper ON BASYS3
 
-**1.INTRODUCTION**
+# ChronoFlex Adaptive FPGA Timekeeper on BASYS3
 
+[GitHub Repo](https://github.com/dhanush-271/ChronoFlex-Adaptive-FPGA-Timekeeper_Basys3)
 
-This project entails the design and implementation of a digital watch on a Basys3 board using Verilog. The watch operates in three primary modes: Real-Time Clock (RTC), Edit Mode, and Timer Mode. The RTC mode displays the current time in a 24-hour format, updating seconds, minutes, and hours in real-time. The following sections provide a detailed overview of the functionality, and implementation of the digital watch.
+👤 **Author**: Kothapalli Dhanush
 
+---
 
-**2.STATES OF OPERATION**
+## 🚀 Project Overview
 
-The design is composed of three states:
+This project involves designing and implementing a digital multifunction watch on a Basys3 FPGA board using Verilog. The system supports:
 
-**2.1 Real-Time Clock (RTC):**
+- Real-Time Clock (RTC)
+- Time and Date Editing
+- Countdown Timer
+- Stopwatch
+- Alarm System
+- Date Display (with long press)
 
-This state functions as a standard clock, displaying the current time in a 24-hour format. The time is updated every second, incrementing the seconds, minutes, and hours accordingly. This mode is the default mode of the watch.
+---
 
-**2.2 Edit Mode:**
+## 🧭 States of Operation
 
-In this state, users can manually set the time. The edit\_shift input allows users to switch between setting hours and minutes, and the inc input increments the selected value. The display shows the current selection by blinking the digits being edited.
+### 1. Real-Time Clock (RTC)
+- Default mode
+- Displays current time in 24-hour format
+- Updates every second
 
-**2.3 Timer Mode:**
+### 2. Edit Mode
+- Set **Time** and **Date**
+- Use `edit_shift` to toggle (hours/minutes/day/month)
+- `inc` to increment fields
+- Blinking digits indicate active edit
 
-The timer state enables the watch to function as a countdown timer. Users can set the duration using edit\_shift and inc inputs. The start\_stop input starts or stops the countdown. The display updates to show the remaining time. The maximum duration that can be set is 59 minutes and 59 seconds.
+### 3. Timer Mode
+- Countdown from user-set duration (max 59:59)
+- `start_stop` toggles timer
+- `edit_shift` and `inc` to set duration
 
+### 4. Stopwatch Mode
+- Activated after Timer
+- Measures elapsed time from 00:00 to 59:59
+- `start_stop` to run/pause
+- `reset` to clear
 
+### 5. Alarm Mode
+- Follows Stopwatch mode
+- Alarm can be toggled ON/OFF
+- Time editable in stop state
+- When triggered, **LED[15] (buzzer_led)** turns on
+- Stop alarm via `start_stop` button
 
+### 6. Date Display
+- Hold `inc` in RTC mode to display date (DD/MM)
+- Editable in Edit mode when `edit_place` is 2 or 3
 
+---
 
-**3.CONSTRAINTS OF THE BOARD**
+## ⌨️ Board Constraints
 
-**3.1 Push Buttons**
+### 🔘 Push Buttons
+- `reset`: Resets values (mode-specific)
+- `mode`: Cycle through all states
+- `edit_shift`: Toggle fields (hours/minutes/date)
+- `inc`: Increment selected field / long press to show date
+- `start_stop`: Start/stop timer, stopwatch or alarm
 
-**reset**: Resets all time values (hours, minutes, seconds) to 0 in the edit mode and the (minutes and seconds) to 0 in the timer mode.
+### 💡 LEDs
+- `mode_value`: Indicates current mode (3-bit)
+- `buzzer_led (LED[15])`: Lights when alarm is triggered; acts as visual buzzer
 
-**mode**: Cycles through clock, edit, and timer states.
+### 🔢 Seven-Segment Display
+| Mode           | Display                        |
+|----------------|--------------------------------|
+| **Clock**      | HH:MM (long press → DD/MM)     |
+| **Edit**       | HH:MM or DD/MM (blinking)      |
+| **Timer**      | MM:SS (editable before start)  |
+| **Stopwatch**  | MM:SS (resets with `reset`)    |
+| **Alarm**      | HH:MM (editable in stop state) |
 
-**edit\_shift**: Toggles editing position (hours/minutes) in edit mode and (minutes/seconds) in timer mode.
+---
 
-**inc**: Increments selected time unit (hours/minutes) in edit mode and  (minutes/seconds) in timer mode.
+## 📸 Output Demo
 
-**start\_stop**: Starts or stops the timer in timer mode.
+🔗 [Watch Demo on Google Drive](https://drive.google.com/file/d/1fSnPEZKsoybbPT9YLK6JAlKtDaetjgsl/view?usp=sharing)
 
-**3.2 LEDs**
+---
 
-**mode\_conf**: Indicates current mode of operation (clock, edit, or timer).
-
-**shift\_conf**: Confirms edit mode and selected time unit (hours or minutes).
-
-**mode\_value**: Displays the current mode on seven-segment display (mode\_value[2:0]).
-
-**3.3 Seven-Segment Display** 
-
-**Clock Mode**: Displays the current hours and minutes.
-
-**Edit Mode**: Shows hours and minutes; blinking alternates based on the edit shift to increment the selected time unit (hours/minutes).
-
-**Timer Mode**: Displays minutes and seconds. It operates based on the timer start/stop state, allowing editing with increment and edit\_place inputs in the stop state.
-
-**4.OUTPUT ON THE BASYS BOARD**
-
-**Drive\_link:** 
-
-<https://drive.google.com/file/d/1fSnPEZKsoybbPT9YLK6JAlKtDaetjgsl/view?usp=sharing>
+Feel free to fork, star, or contribute to the project! 🚀
 
 
